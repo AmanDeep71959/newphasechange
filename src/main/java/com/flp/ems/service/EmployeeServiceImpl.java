@@ -17,7 +17,7 @@ import com.flp.ems.dao.EmployeeDao;
 public class EmployeeServiceImpl  implements EmployeeService{
 
 	@Autowired
-	private EmployeeDao employeeDao;
+	private  EmployeeDao employeeDao;
 
 	@Transactional
 	public void saveEmployee(Employee employee) {
@@ -67,6 +67,24 @@ public class EmployeeServiceImpl  implements EmployeeService{
 	public List<Role> getAllRoles() {
 		
 		return employeeDao.getAllRoles();
+	}
+
+	@Transactional
+	public Role findRole(String rolId) {
+		Role rol=employeeDao.findRole(rolId);
+		return rol;
+	}
+
+	@Transactional
+	public Project findProject(String projId) {
+		Project proj=employeeDao.findProject(projId);
+		return proj;
+	}
+
+	@Transactional
+	public Department findDepartment(String depId) {
+		Department dept=employeeDao.findDepartment(depId);
+		return dept;
 	}
 	
 }

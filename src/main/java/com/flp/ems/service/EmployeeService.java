@@ -17,4 +17,7 @@ public interface EmployeeService {
 	public List<Department> getAllDepartments();
 	public List<Project> getAllProjects();
 	public List<Role> getAllRoles();
+	Role findRole(String rolId);
+	Project findProject(String projId);
+	Department findDepartment(String depId);
 }

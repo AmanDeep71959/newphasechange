@@ -20,7 +20,10 @@ package com.flp.ems.controller;
 	import org.springframework.web.bind.annotation.RequestParam;
 	import org.springframework.web.servlet.ModelAndView;
 
+import com.flp.ems.domain.Department;
 import com.flp.ems.domain.Employee;
+import com.flp.ems.domain.Project;
+import com.flp.ems.domain.Role;
 import com.flp.ems.service.EmployeeService;
 
 	@Controller
@@ -30,6 +33,9 @@ import com.flp.ems.service.EmployeeService;
 		private EmployeeService employeeService;
 		
 		 Employee emp;
+		 Department dept;
+		 Project proj;
+		 Role rol;
 		 @ModelAttribute("emp")
 		 public Employee getEmployee()
 		 {
@@ -59,16 +65,23 @@ import com.flp.ems.service.EmployeeService;
 		
 		@RequestMapping(value="/empSave",method=RequestMethod.POST)
 		public String saveEmployee(@Valid @ModelAttribute("emp")Employee employee,
+				
 				BindingResult results,ModelMap map){
+			proj=employeeService.findProject(employee.getProject());
+			dept=employeeService.findDepartment(employee.getDepartment());
+			rol=employeeService.findRole(employee.getRole());
+			employee.setDepartments(dept);
+			employee.setProjects(proj);
+			employee.setRoles(rol);
 			System.out.println(employee);
 			System.out.println("Employee_id in save :"+employee.getEmpId());
 			map.put("employees", employeeService.getAllEmployees());
 			map.put("departments", employeeService.getAllDepartments());
 			map.put("projects", employeeService.getAllProjects());
 			map.put("roles", employeeService.getAllRoles());
-			if(results.hasErrors()){
+			/*if(results.hasErrors()){
 				return "employee";
-			}else{
+			}else{*/
 				if(employee.getEmpId() == -1){
 					employeeService.saveEmployee(employee);
 					}
@@ -76,7 +89,7 @@ import com.flp.ems.service.EmployeeService;
 					employeeService.updateEmployee(employee);
 					}
 				return "redirect:employeeForm";
-			}
+			//}
 		}
 		
 		

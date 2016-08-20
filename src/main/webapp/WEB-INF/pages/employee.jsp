@@ -171,9 +171,9 @@
 			<td>${employee.date_of_birth}</td>
 			<td>${employee.date_of_joining}</td>
 			<td>${employee.address}</td>
-			<td>${employee.department.deptId}</td>
-			<td>${employee.project.projId}</td>
-			<td>${employee.role.roleId}</td>
+			<td>${employee.department}</td>
+			<td>${employee.project}</td>
+			<td>${employee.role}</td>
 			<td>
 				<a href="deleteEmployee/${employee.empId}">Delete</a>
 				&nbsp;&nbsp;&nbsp;

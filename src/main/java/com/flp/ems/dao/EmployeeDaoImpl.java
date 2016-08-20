@@ -54,19 +54,84 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	@Override
 	public List<Department> getAllDepartments() {
-		
+		//includeDepartment();
 		return sessionFactory.getCurrentSession().createQuery("from Department").list();
 	}
 
 	@Override
 	public List<Project> getAllProjects() {
-		
+		//includeProject();
 		return sessionFactory.getCurrentSession().createQuery("from Project").list();
 	}
 
 	@Override
 	public List<Role> getAllRoles() {
+		//includeRole();
 		return sessionFactory.getCurrentSession().createQuery("from Role").list();
 	}
-
+	
+	@Override
+	public Department findDepartment(String depId) {
+		int deptId=Integer.parseInt(depId);
+		Department dept=(Department)sessionFactory.getCurrentSession().get(Department.class, deptId);
+		return dept;
+	}
+	@Override
+	public Project findProject(String projId) {
+		int projectId=Integer.parseInt(projId);
+		Project proj=(Project)sessionFactory.getCurrentSession().get(Project.class, projectId);
+		return proj;
+	}
+	@Override
+	public Role findRole(String rolId) {
+		int roleId=Integer.parseInt(rolId);
+		 Role rol=(Role)sessionFactory.getCurrentSession().get(Role.class, roleId);
+		return rol;
+	}
+	
+	@Override
+	public void includeDepartment(){
+		Department d1=new Department(50,"HR","Developement");
+		Department d2=new Department(51,"FS","Developement");
+		Department d3=new Department(52,"NFS","Developement");
+		Department d4=new Department(53,"ADM","Developement");
+		sessionFactory.getCurrentSession().save(d1);
+		sessionFactory.getCurrentSession().save(d2);
+		sessionFactory.getCurrentSession().save(d3);
+		sessionFactory.getCurrentSession().save(d4);
+		
+	}
+	
+	@Override
+	public void includeProject(){
+		Department d1=new Department(50,"HR","Developement");
+		Department d2=new Department(52,"FS","Developement");
+		Department d3=new Department(53,"NFS","Developement");
+		Department d4=new Department(54,"ADM","Developement");
+		Project p1=new Project(500,"MORGAN","Morgan Stanley",d1);
+		Project p2=new Project(501,"MICROSOFT","Microsoft",d4);
+		Project p3=new Project(502,"SAP","S.A.P",d2);
+		Project p4=new Project(503,"ORACLE","Oracle",d1);
+		Project p5=new Project(504,"AMAZON","Amazon",d3);
+		sessionFactory.getCurrentSession().save(p1);
+		sessionFactory.getCurrentSession().save(p2);
+		sessionFactory.getCurrentSession().save(p3);
+		sessionFactory.getCurrentSession().save(p4);
+		sessionFactory.getCurrentSession().save(p5);
+	}
+	
+	@Override
+	public void includeRole(){
+		Role r1=new Role(2000,"Developer","Develop");
+		Role r2=new Role(2001,"Tester","Test");
+		Role r3=new Role(2002,"Maintain","Maintainence");
+		Role r4=new Role(2003,"Cloud","Cloud");
+		sessionFactory.getCurrentSession().save(r1);
+		sessionFactory.getCurrentSession().save(r2);
+		sessionFactory.getCurrentSession().save(r3);
+		sessionFactory.getCurrentSession().save(r4);
+			
+	}
+	
+	
 }
